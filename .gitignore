@@ -6,6 +6,9 @@
 .cache
 dist
 
+# Surreal DB
+.database
+
 # Node dependencies
 node_modules
 
