@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+    command: npm run dev
+    depends_on:
+      - surrealdb
+    networks:
+      - database
+    ports:
+      - 24678:24678
+      - 3000:3000
+    volumes:
+      - .:/var/nuxt
+      - /var/nuxt/node_modules
+
+  surrealdb:
+    env_file:
+      - .env
+    entrypoint: 
+      - /surreal 
+      - start
+      - --allow-guests
+      - --auth
+      - --user
+      - $DB_USER
+      - --pass
+      - $DB_PASSWORD
+      - file://surrealdb
+    image: surrealdb/surrealdb:latest
+    networks:
+      - database
+    ports:
+      - 8000:8000
+    volumes:
+      - ./.database/surrealdb:/surrealdb
+
+networks:
+  database:
+    driver: bridge
