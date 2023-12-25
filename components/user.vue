@@ -1,8 +1,8 @@
 <template>
   <div class="gap-6 grid">
     <p class="leading-relaxed text-center">
-      Welcome to a starting point for Nuxt and SurrealDB projects! Create an account below to
-      see authentication, then leave a comment to see live queries work their magic.
+      Welcome to a starting point for Nuxt and SurrealDB projects. Create an account below to
+      see authentication, then leave a comment to see live queries work their magic!
     </p>
 
     <form class="gap-6 grid sm:px-10">
