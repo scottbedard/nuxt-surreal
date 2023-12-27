@@ -14,7 +14,7 @@ OPTION IMPORT;
 -- SCOPES
 -- ------------------------------
 
-DEFINE SCOPE user SESSION 1d SIGNUP (CREATE user CONTENT { email: $email, password: crypto::bcrypt::generate($password), username: $username }) SIGNIN (SELECT * FROM user WHERE username = $username AND crypto::bcrypt::compare(password, $password));
+DEFINE SCOPE user SESSION 1d SIGNUP (CREATE user CONTENT { password: crypto::bcrypt::generate($password), username: $username }) SIGNIN (SELECT * FROM user WHERE username = $username AND crypto::bcrypt::compare(password, $password));
 
 -- ------------------------------
 -- TABLE: user
@@ -26,5 +26,4 @@ DEFINE FIELD createdAt ON user TYPE datetime DEFAULT time::now() PERMISSIONS FOR
 DEFINE FIELD password ON user TYPE string PERMISSIONS FOR select, delete NONE, FOR create, update FULL;
 DEFINE FIELD username ON user TYPE string PERMISSIONS FOR select, create, update FULL, FOR delete NONE;
 
-DEFINE INDEX email ON user FIELDS email UNIQUE;
 DEFINE INDEX username ON user FIELDS username UNIQUE;
