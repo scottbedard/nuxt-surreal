@@ -9,6 +9,7 @@
       <div class="gap-6 grid sm:grid-cols-2">
         <input
           v-model="username"
+          autocomplete="username"
           autofocus
           class="border border-gray-300 rounded-lg h-10 px-3 text-center tracking-wide"
           placeholder="Username"
@@ -16,6 +17,7 @@
 
         <input
           v-model="password"
+          autocomplete="current-password"
           class="border border-gray-300 rounded-lg h-10 px-3 text-center tracking-wide"
           placeholder="Password"
           required

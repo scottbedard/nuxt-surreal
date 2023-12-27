@@ -7,7 +7,8 @@
 
       <a
         class="text-blue-600 text-sm hover:underline"
-        href="#">
+        href="#"
+        @click.prevent="$emit('logout')">
         (or click here to log out)
       </a>
     </div>
@@ -23,6 +24,10 @@
 
 <script lang="ts" setup>
 import type { User } from '~/app/types'
+
+defineEmits<{
+  (e: 'logout'): void
+}>()
 
 defineProps<{
   user: User

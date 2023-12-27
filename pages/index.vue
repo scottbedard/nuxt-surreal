@@ -13,7 +13,8 @@
 
       <Chat
         v-if="user"
-        :user="user" />
+        :user="user"
+        @logout="onLogout" />
 
       <User
         v-else
@@ -29,10 +30,15 @@ const token = ref(data.value?.token)
 
 const user = ref(data.value?.user)
 
+async function onLogout() {
+  await $fetch('/api/logout')
+  token.value = undefined
+  user.value = undefined
+}
+
 async function onSubmit(body: { username: string, password: string }) {
   const response = await $fetch('/api/user', { method: 'POST', body })
-
-  console.log('done', { response })
-  // token.value = response.token
+  token.value = response.token
+  user.value = response.user
 }
 </script>
