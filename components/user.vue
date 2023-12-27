@@ -5,15 +5,17 @@
       see authentication, then leave a comment to see live queries work their magic!
     </p>
 
-    <form class="gap-6 grid sm:px-10">
+    <form class="gap-6 grid sm:px-10" @submit.prevent="$emit('submit', { username, password })">
       <div class="gap-6 grid sm:grid-cols-2">
         <input
+          v-model="username"
           autofocus
           class="border border-gray-300 rounded-lg h-10 px-3 text-center tracking-wide"
           placeholder="Username"
           required />
 
         <input
+          v-model="password"
           class="border border-gray-300 rounded-lg h-10 px-3 text-center tracking-wide"
           placeholder="Password"
           required
@@ -28,3 +30,13 @@
     </form>
   </div>
 </template>
+
+<script lang="ts" setup>
+defineEmits<{
+  (e: 'submit', data: { username: string, password: string }): void
+}>()
+
+const username = ref('')
+
+const password = ref('')
+</script>
