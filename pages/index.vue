@@ -11,15 +11,28 @@
         and <a class="text-[#ff00a0] hover:underline" href="https://surrealdb.com">SurrealDB</a>
       </h1>
 
-      <User @submit="onSubmit" />
+      <Chat
+        v-if="user"
+        :user="user" />
+
+      <User
+        v-else
+        @submit="onSubmit" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+const { data } = await useFetch('/api/user')
+
+const token = ref(data.value?.token)
+
+const user = ref(data.value?.user)
+
 async function onSubmit(body: { username: string, password: string }) {
   const response = await $fetch('/api/user', { method: 'POST', body })
 
-  console.log('done', response)
+  console.log('done', { response })
+  // token.value = response.token
 }
 </script>
