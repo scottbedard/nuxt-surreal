@@ -27,7 +27,6 @@
 const { data } = await useFetch('/api/user')
 
 const token = ref(data.value?.token)
-
 const user = ref(data.value?.user)
 
 async function onLogout() {
@@ -37,8 +36,12 @@ async function onLogout() {
 }
 
 async function onSubmit(body: { username: string, password: string }) {
-  const response = await $fetch('/api/user', { method: 'POST', body })
-  token.value = response.token
-  user.value = response.user
+  try {
+    const response = await $fetch('/api/user', { method: 'POST', body })
+    token.value = response.token
+    user.value = response.user
+  } catch {
+    console.error('Authentication failed')
+  }
 }
 </script>
